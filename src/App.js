@@ -5,17 +5,27 @@ import carregandoimg from "./img/carregando.gif";
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
-  const [dados, setDados] = React.useState(null);
+  const [dados, setDados] = React.useState("");
   const [user, setUser] = React.useState("");
   const [carregando, setCarregando] = React.useState(null);
 
   async function handleClick(event) {
+    event.preventDefault();
     setCarregando(true);
     const resposta = await fetch(`https://api.github.com/users/${user}`);
     const json = await resposta.json();
     setDados(json);
     console.log(resposta);
-    setCarregando(false)
+
+    setCarregando(false);
+
+    if (document.getElementById("busca").value.length < 1) {
+      console.log("erro");
+      alert('Por favor, digite um nome de Usuario')
+      document.getElementById("busca").focus();
+      setDados(false);
+      return false;
+    }
   }
 
   return (
@@ -33,16 +43,18 @@ function App() {
           onChange={(event) => setUser(event.target.value)}
           required
         />
+
+        <button className="btn btn-primary " onClick={handleClick}>
+          Buscar
+        </button>
       </form>
 
-      <button className="btn btn-primary mt-2" onClick={handleClick}>
-        Buscar
-      </button>
-      
       <div className="mt-3">
-      
-      {carregando && <img src={carregandoimg} width="80px" alt="carregando"/>}
-      {!carregando && dados && <Info dados={dados} />}</div>
+        {carregando && (
+          <img src={carregandoimg} width="90px" alt="carregando" />
+        )}
+        {!carregando && dados && <Info dados={dados} />}
+      </div>
     </div>
   );
 }
