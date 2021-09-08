@@ -1,5 +1,5 @@
 import React from "react";
-// import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 const Info = ({ dados }) => {
     
@@ -9,7 +9,7 @@ const Info = ({ dados }) => {
       <p>{dados.login}</p>
       <p>{dados.email}</p>
       <p id="repositorio">Repositorios públicos: {dados.public_repos}</p>
-      <a href={dados.html_url} target="_blank">{dados.html_url}</a>
+      <a href={dados.html_url} target="_blank" rel="noreferrer">{dados.html_url}</a>
     </div>
   );
 };

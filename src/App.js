@@ -2,7 +2,7 @@ import React from "react";
 import Info from "./Info";
 import img from "./img/img.png";
 import carregandoimg from "./img/carregando.gif";
-// import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 function App() {
   const [dados, setDados] = React.useState("");
@@ -21,7 +21,7 @@ function App() {
 
     if (document.getElementById("busca").value.length < 1) {
       console.log("erro");
-      alert('Por favor, digite um nome de Usuario')
+      alert("Por favor, digite um nome de Usuario");
       document.getElementById("busca").focus();
       setDados(false);
       return false;
